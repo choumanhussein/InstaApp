@@ -27,7 +27,7 @@ gem 'mini_magick'
 gem 'jbuilder', '~> 2.7'
 gem 'rexml'
 
-
+gem 'faker' 
 
 group :development, :test do
 

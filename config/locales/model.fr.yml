@@ -1,0 +1,17 @@
+and :
+  activerecord:
+    models:
+      blog : blog
+      user : utilisateur
+    attributes:
+      blog :
+        title : Titre
+        content : contenue
+      user:
+        title : Titre
+        name : nom
+        email : addresse email
+        password : mot de passe
+        current_password : mot de passe actuel
+        password_confirmation : mot de passe de confirmation
+        remember_me : se souvenir de moi
