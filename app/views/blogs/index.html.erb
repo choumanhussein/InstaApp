@@ -1,0 +1,161 @@
+<header>
+  <div class="en_tete">
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta_icon.png", class: 'insta_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta.png", class: 'insta_logo' %>
+    <% end %>
+
+    <span><%= image_tag "recherche.png", class: 'recherche' %>rechercher</span>
+    <%= link_to "#" do %>
+    <%= image_tag "home.jpg", class: 'insta_icon' %>
+    <%= image_tag "plus.png", class: 'insta_icon' %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <%= image_tag "compass_img.png", class: 'insta_icon' %>
+    <%= image_tag "heart_img.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to user_path(current_user.id) do %>
+    <%= image_tag "user.png", class: 'insta_icon' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+
+  <div class="left_box">
+    <div class="share_box">
+      <%= link_to 'Faire Un Poste', new_blog_path %>
+    </div>
+    <% @blogs.each do |blog| %>
+    <div class="main_box">
+      <table>
+        <tr>
+          <td>
+            <div class="main_box_head">
+              <% if blog.user.image.file.nil? %>
+                <%= image_tag 'no_profile_pic.png', class: 'contributer_img' %>
+                <% else %>
+                <%= image_tag blog.user.image.url, class: 'contributer_img' %>
+              <% end %>
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <div class="main_box_menu">
+                <%= link_to 'Voir le poste', blog_path(blog.id) %>
+                <% if current_user.id == blog.user.id %>
+                <%= link_to "Edite", edit_blog_path(blog.id) %>
+                <%= link_to 'Supprimer', blog_path(blog.id), method: :delete ,data: { confirm: 'Voulez Vous Vraiment Supprimer ?' } %>
+              </div>
+            </div>
+          </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>
+          <% if blog.image.file.nil? %>
+            <% else %>
+            <%= image_tag blog.image.url, class: 'main_box_img' %>
+          <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <div class="main_box_bottom">
+            <%= image_tag "heart2_img.png", class: 'heart2_img' %>
+            <%= image_tag "comment_img.png", class: 'comment_img' %>
+            <% @love = current_user.loves.find_by(blog_id: blog.id) %>
+           <% if @love.present? %>
+             <%= link_to love_path(id: @love.id), method: :delete do %>
+               <%= image_tag "save_on_img.png", class: 'save_img' %>
+             <% end %>
+             <% else %>
+             <%= link_to loves_path(blog_id: blog.id), method: :post do%>
+               <%= image_tag "save_off_img.png", class: 'save_img' %>
+             <% end %>
+           <% end %>
+
+            <p class="comment">
+              <%= link_to "#{blog.user.name}", user_path(blog.user.id), class: 'contributer' %>
+              <%= blog.content %>
+            </p>
+            <p class="upload_date"><%= blog.user.created_at.try(:strftime,"%D") %></p>
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="main_box_addcomment">
+              <span>Ajoutez un commentaire</span>
+              <div class="add_contribute">Poster</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <br>
+    <br>
+    <% end %>
+    <br>
+    <br>
+  </div>
+
+  <div class="right_box">
+    <div class="login_user_profile">
+      <% if current_user.image.file.nil? %>
+        <%= image_tag 'no_profile_pic.png', class: 'login_user_img' %>
+      <% else %>
+        <%= image_tag current_user.image.url, class: 'login_user_img' %>
+      <% end %>
+      <div class="login_user_name">
+        <p class="contributer">
+          <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'contributer' %>
+        </p>
+        <p>
+        <%= link_to "#{current_user.name}", user_path(current_user.id), class: 'login_user_name' %>
+        </p>
+      </div>
+    </div>
+    <div class="stories_box">
+      <span>Pour Vous !</span>
+      <div class="recommend_box_left">
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'messi.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>Messi</p>
+            <span class="upload_date">@Messi</span>
+            <br>
+          </div>
+        </div>
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'cristiano.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>Cristiano</p>
+            <span class="upload_date">@Cristiano</span>
+            <br>
+          </div>
+        </div>
+        <div class="stories_box_users">
+          <div class="recommend_user_img_border">
+            <%= image_tag 'zidane.png', class: 'stories_user_img' %>
+          </div>
+          <div class="recommend_user_name">
+            <p>Zidane</p>
+            <span class="upload_date">@Zidane</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    <footer>
+      <p>~LS~</p>
+      <p>Pour Dive Into Code</p>
+      <br>
+      <p>© 2022 InstApp</p>
+      <br>
+      <br>
+    </footer>
+  </div>
+</main>

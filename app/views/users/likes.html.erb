@@ -1,0 +1,67 @@
+<header>
+  <div class="en_tete">
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta_icon.png", class: 'insta_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta.png", class: 'insta_logo' %>
+    <% end %>
+
+    <span><%= image_tag "recherche.png", class: 'recherche' %>rechercher</span>
+    <%= link_to "#" do %>
+    <%= image_tag "home.jpg", class: 'insta_icon' %>
+    <%= image_tag "plus.png", class: 'insta_icon' %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <%= image_tag "compass_img.png", class: 'insta_icon' %>
+    <%= image_tag "heart_img.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to user_path(current_user.id) do %>
+    <%= image_tag "user.png", class: 'insta_icon' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+<h1>Mes Favoris </h1>
+<br>
+<br>
+<br>
+<% @loves.each do |love| %>
+<table>
+  <tr>
+    <td>Poster Par<%= link_to "#{love.blog.user.name}", user_path(love.blog.user.id) %></td>
+    <td><%= link_to 'details', blog_path(love.blog.id) %></td>
+  </tr>
+  <tr>
+    <td>
+      <% if love.blog.image.file.nil? %>
+        <% else %>
+        <%= image_tag love.blog.image.url %>
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= love.user.created_at.try(:strftime,"%D") %>
+      <%= love.blog.content %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+    <% @love = current_user.loves.find_by(blog_id: love.blog.id) %>
+    <% if @love.present? %>
+    <%= link_to 'Supprimer', love_path(id: @love.id), method: :delete %>
+      <% else %>
+    <%= link_to 'favoris', loves_path(blog_id: love.blog.id), method: :post%>
+    <% end %>
+    </td>
+  </tr>
+  <br>
+  <br>
+  <br>
+</table>
+<% end %>
+<br>
+<br>
+</main>

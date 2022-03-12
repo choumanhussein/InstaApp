@@ -1,0 +1,24 @@
+<div class="login_box">
+  <%= image_tag "insta.png", class: 'insta_logo1' %>
+  <p> </p>
+  <div class="login_forms">
+  <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+    <%= f.label :email, "Adress-email" %>
+    <%= f.email_field :email %>
+    <br>
+    <%= f.label :password, "Mot de passe" %>
+    <%= f.password_field :password %>
+    <br>
+    <%= f.submit "Se connecter"%>
+  <% end %>
+  </div>
+  <div class="forgot_pass">
+    <span>Mot de passe Oublier ?</span>
+    <br>
+    <%= link_to "S'inscrire", new_user_path, class: 'login_link' %>
+  </div>
+</div>
+<div class="login_box_mini">
+  <span>Vous n'avez pas de comptes ?</span>
+  <%= link_to "Inscrivez-vous !", new_user_path, class: 'login_link' %>
+</div>

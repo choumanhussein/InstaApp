@@ -1,0 +1,30 @@
+<%= form_with(model: @blog, local: true ,url: choose_new_or_edit ) do |form| %>
+  <% if @blog.errors.any? %>
+    <div id="error_explanation">
+      <h2>Vous avez fais<%= @blog.errors.count %> Erreur(s)</h2>
+      <ul>
+      <% @blog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :image, "Image" %>
+    <br>
+    <%= image_tag(@blog.image.url) if @blog.image && @blog.image.url %>
+    <%= form.file_field :image %>
+    <%= form.hidden_field :image_cache %>
+  </div>
+  <br>
+  <div class="blog_content">
+    <%= form.label :content, "Commenter" %>
+    <br>
+    <%= form.text_field :content, size: :"100*50" %>
+  </div>
+  <br>
+  <%= form.submit "Poster"%>
+<% end %>
+<br>
+<%= link_to "revenir", blogs_path %>

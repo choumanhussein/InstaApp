@@ -1,0 +1,27 @@
+<header>
+  <div class="en_tete">
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta_icon.png", class: 'insta_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta.png", class: 'insta_logo' %>
+    <% end %>
+
+    <span><%= image_tag "recherche.png", class: 'recherche' %>rechercher</span>
+    <%= link_to "#" do %>
+    <%= image_tag "home.jpg", class: 'insta_icon' %>
+    <%= image_tag "plus.png", class: 'insta_icon' %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <%= image_tag "compass_img.png", class: 'insta_icon' %>
+    <%= image_tag "heart_img.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to user_path(current_user.id) do %>
+    <%= image_tag "user.png", class: 'insta_icon' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+<%= render 'form' %>
+</main>

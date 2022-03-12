@@ -1,0 +1,48 @@
+<header>
+  <div class="en_tete">
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta_icon.png", class: 'insta_icon' %>
+    <% end %>
+    <%= image_tag "header_border.png", class: 'header_border' %>
+    <%= link_to blogs_path do %>
+      <%= image_tag "insta.png", class: 'insta_logo' %>
+    <% end %>
+
+    <span><%= image_tag "recherche.png", class: 'recherche' %>rechercher</span>
+    <%= link_to "#" do %>
+    <%= image_tag "home.jpg", class: 'insta_icon' %>
+    <%= image_tag "plus.png", class: 'insta_icon' %>
+    <%= image_tag "insta_messenger.jpg", class: 'insta_icon' %>
+    <%= image_tag "compass_img.png", class: 'insta_icon' %>
+    <%= image_tag "heart_img.png", class: 'insta_icon' %>
+    <% end %>
+    <%= link_to user_path(current_user.id) do %>
+    <%= image_tag "user.png", class: 'insta_icon' %>
+    <% end %>
+  </div>
+</header>
+
+<main>
+  <h1>Page de Profil de <%= @user.name %></h1>
+  <% if current_user.id == @user.id %>
+    <p><%= link_to "Edite", edit_user_path(@user.id) %></p>
+  <% end %>
+  <% if @user.image.file.nil? %>
+    <%= image_tag 'no_profile_pic_big.png', class: 'profile_img' %>
+    <% else %>
+    <%= image_tag @user.image.url, class: 'profile_img' %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <% if current_user.id == @user.id %>
+  <%= link_to "Postes Favoris", likes_user_path(current_user.id) %>
+    <br>
+    <br>
+    <%= link_to "Se deconnecter", session_path(current_user.id), method: :delete %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+</main>
